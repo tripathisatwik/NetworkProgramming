@@ -10,11 +10,9 @@ public class SocketInfo {
         for (int i=0; i < args.length; i++){
             try {
                 Socket theSocket = new Socket(args[i], 80);
-                System.out.println("Connected to " 
-                    + theSocket.getInetAddress()
-                    + " on port " + theSocket.getLocalPort()
-                    + " of " + theSocket.getLocalAddress()
-                );
+                System.out.println("Connected to: " + theSocket.getInetAddress());
+                System.out.println("Local Port: " + theSocket.getLocalPort());
+                 System.out.println("IP of host: " + theSocket.getLocalAddress());
             } catch (UnknownHostException e) {
                 System.err.println("Can't find " + args[i]);
             } catch (SocketException e) {
