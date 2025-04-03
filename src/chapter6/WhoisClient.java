@@ -1,18 +1,37 @@
 package chapter6;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.io.*;
+import java.net.*;
 
 public class WhoisClient {
-    public final static int DEFAULT_PORT = 443;
-    public final String DEFAULT_HOST = "lookup.icann.org";
+    public final static int DEFAULT_PORT = 43;
+    public final static String DEFAULT_HOST = "whois.iana.org";
+
     public static void main(String[] args) {
-        InetAddress server;
+        if (args.length == 0) {
+            System.err.println("Usage: java WhoisClient <domain>");
+            return;
+        }
+
+        String query = args[0];
+
         try {
-            server = InetAddress.getByName(DEFAULT_HOST);
-        } catch (UnknownHostException e) {
-            System.err.println("Error: Could not locate defualt host" + DEFAULT_HOST);
-            System.err.println("Check to make sure you're connected to the Internet and that DNS is ");
+            InetAddress server = InetAddress.getByName(DEFAULT_HOST);
+            Socket socket = new Socket(server, DEFAULT_PORT);
+
+            Writer out = new OutputStreamWriter(socket.getOutputStream(), "ISO-8859-1");
+            out.write(query + "\r\n");
+            out.flush();
+
+            InputStream in = new BufferedInputStream(socket.getInputStream());
+            int c;
+            while ((c = in.read()) != -1) {
+                System.out.write(c);
+            }
+
+            socket.close();
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
         }
     }
 }
