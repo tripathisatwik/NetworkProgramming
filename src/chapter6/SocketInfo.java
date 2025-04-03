@@ -7,24 +7,23 @@ import java.net.UnknownHostException;
 
 public class SocketInfo {
     public static void main(String[] args) {
-        for (int i=0; i < args.length; i++){
-            try {
-                Socket theSocket = new Socket(args[i], 80);
-                System.out.println("Connected to: " + theSocket.getInetAddress());
-                System.out.println("Port: " + theSocket.getPort());
-                System.out.println("Local Port: " + theSocket.getLocalPort());
-                System.out.println("IP of host: " + theSocket.getLocalAddress());
-                System.out.println("Input Stream: " + theSocket.getInputStream());
-                System.out.println("Output Stream: " + theSocket.getOutputStream());
-                theSocket.close();
+        String target = "example.com";
+        try {
+            Socket theSocket = new Socket(target, 80);
+            System.out.println("Connected to: " + theSocket.getInetAddress());
+            System.out.println("Port: " + theSocket.getPort());
+            System.out.println("Local Port: " + theSocket.getLocalPort());
+            System.out.println("IP of host: " + theSocket.getLocalAddress());
+            System.out.println("Input Stream: " + theSocket.getInputStream());
+            System.out.println("Output Stream: " + theSocket.getOutputStream());
+            theSocket.close();
 
-            } catch (UnknownHostException e) {
-                System.err.println("Can't find " + args[i]);
-            } catch (SocketException e) {
-                System.err.println("Could not connect to "+ args[i]);
-            } catch (IOException e ) {
-                System.err.println(e);
-            }
+        } catch (UnknownHostException e) {
+            System.err.println("Can't find " + target);
+        } catch (SocketException e) {
+            System.err.println("Could not connect to "+ target);
+        } catch (IOException e ) {
+            System.err.println(e);
         }
     }
 }

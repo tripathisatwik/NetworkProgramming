@@ -5,11 +5,11 @@ import java.net.Socket;
 
 public class HalfSocket {
     public static void main(String[] args) {
-        try (Socket connection = new Socket("neverssl.com", 80)) {
+        try (Socket connection = new Socket("www.example.com", 80)) {
             // Send HTTP request
             Writer out = new OutputStreamWriter(connection.getOutputStream(), "ISO-8859-1");
             out.write("GET / HTTP/1.0\r\n");
-            out.write("Host: www.google.com\r\n");
+            out.write("Host: www.example.com\r\n");
             out.write("\r\n"); // Blank line to end headers
             out.flush();
 

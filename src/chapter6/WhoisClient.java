@@ -8,13 +8,7 @@ public class WhoisClient {
     public final static String DEFAULT_HOST = "whois.iana.org";
 
     public static void main(String[] args) {
-        if (args.length == 0) {
-            System.err.println("Usage: java WhoisClient <domain>");
-            return;
-        }
-
-        String query = args[0];
-
+        String query = "tripathisatwik.com.np";
         try {
             InetAddress server = InetAddress.getByName(DEFAULT_HOST);
             Socket socket = new Socket(server, DEFAULT_PORT);
@@ -23,6 +17,7 @@ public class WhoisClient {
             out.write(query + "\r\n");
             out.flush();
 
+            System.out.println("\n Details of " + query);
             InputStream in = new BufferedInputStream(socket.getInputStream());
             int c;
             while ((c = in.read()) != -1) {
