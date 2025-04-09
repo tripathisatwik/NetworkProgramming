@@ -2,13 +2,12 @@
 package chapter7;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 
 public class LocalPortScanner {
     public static void main(String[] args) {
         int start = 1;
-        int end = 65535;
+        int end = 500;
         for(int port=start;port<=end;port++){
             try {
                 ServerSocket server = new ServerSocket(port);
